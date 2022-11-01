@@ -1,19 +1,19 @@
 import counterReducer, {
-  CounterState,
+  CurrencyState,
   increment,
   decrement,
   incrementByAmount,
-} from './counterSlice';
+} from './currencyConverterSlice';
 
 describe('counter reducer', () => {
-  const initialState: CounterState = {
+  const initialState: CurrencyState = {
     value: 3,
-    status: 'idle',
+    currency: 'GBP',
   };
   it('should handle initial state', () => {
     expect(counterReducer(undefined, { type: 'unknown' })).toEqual({
       value: 0,
-      status: 'idle',
+      currency: 'idle',
     });
   });
 
