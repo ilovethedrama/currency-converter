@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { CurrencyConversionObject } from "../types/currency";
 import { useFetch } from "../helpers/helpers";
+import styled from "styled-components";
 
 interface Props {
   baseAmount: number
@@ -11,6 +12,25 @@ interface Props {
   convertedCurrency: string
 }
 
+const InputWrapper = styled.div`
+  margin: 20px 0;
+  input, select {
+    padding: 5px; 0
+  }
+
+  input {
+    margin-right: 20px
+}
+`;
+
+const SubmitWrapper = styled.div`
+  padding: 20px 0;
+  
+  input {
+    padding: 5px 20px;
+
+  }
+`;
 
 const CurrencyConverterForm: React.FC<Props> = () => {
 
@@ -29,11 +49,12 @@ const formInfo = getValues()
 
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
+          <InputWrapper>
             <input defaultValue="1" {...register("baseAmount", { required: true, valueAsNumber: true,
               validate: (value) => value > 0})} /> 
             {errors.baseAmount && <span>Please enter a valid number</span>}
-
+          {/* </InputWrapper>
+          <InputWrapper> */}
             <select {...register("baseCurrency")} >
               {data && data.map(({code, name}) => (
                 <option defaultValue={"Australian Dollar"} key={name}>
@@ -41,12 +62,13 @@ const formInfo = getValues()
                 </option>
               ))}
             </select>
-          </div>
-          <div>
+          </InputWrapper>
+          <InputWrapper>
             <input {...register("convertedAmount", {valueAsNumber: true,
               validate: (value) => value > 0})} />
             {errors.convertedAmount && <span>Please enter a valid number</span>}
-
+          {/* </InputWrapper>
+          <InputWrapper> */}
             <select {...register("convertedCurrency")}>
             {data && data.map(({code, name}) => (
                 <option key={name}>
@@ -54,8 +76,10 @@ const formInfo = getValues()
                 </option>
               ))}
             </select>
-          </div>
-          <input type="submit"/>
+          </InputWrapper>
+          <SubmitWrapper>
+            <input type="submit"/>
+          </SubmitWrapper>
         </form>
       </div>
 
