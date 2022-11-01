@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
-import { fetchCount } from './counterAPI';
+import { fetchCount } from './currencyConverterAPI';
 
-export interface CounterState {
+export interface CurrencyState {
   value: number;
-  status: 'idle' | 'loading' | 'failed';
+  currency: string;
 }
 
-const initialState: CounterState = {
+const initialState: CurrencyState = {
   value: 0,
-  status: 'idle',
+  currency: 'GBP',
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -51,14 +51,14 @@ export const counterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(incrementAsync.pending, (state) => {
-        state.status = 'loading';
+        state.currency = 'loading';
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.currency = 'idle';
         state.value += action.payload;
       })
       .addCase(incrementAsync.rejected, (state) => {
-        state.status = 'failed';
+        state.currency = 'failed';
       });
   },
 });
