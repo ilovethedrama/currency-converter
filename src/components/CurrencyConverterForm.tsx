@@ -21,6 +21,12 @@ const InputWrapper = styled.div`
   input {
     margin-right: 20px
 }
+
+  small {
+   padding-right: 60px;
+   color: #D94B5F;
+   font-weight: 700;
+  }
 `;
 
 const SubmitWrapper = styled.div`
@@ -52,9 +58,8 @@ const formInfo = getValues()
           <InputWrapper>
             <input defaultValue="1" {...register("baseAmount", { required: true, valueAsNumber: true,
               validate: (value) => value > 0})} /> 
-            {errors.baseAmount && <span>Please enter a valid number</span>}
-          {/* </InputWrapper>
-          <InputWrapper> */}
+            <small>{errors.baseAmount && <span>Please enter a valid number</span>}</small>
+
             <select {...register("baseCurrency")} >
               {data && data.map(({code, name}) => (
                 <option defaultValue={"Australian Dollar"} key={name}>
@@ -66,9 +71,8 @@ const formInfo = getValues()
           <InputWrapper>
             <input {...register("convertedAmount", {valueAsNumber: true,
               validate: (value) => value > 0})} />
-            {errors.convertedAmount && <span>Please enter a valid number</span>}
-          {/* </InputWrapper>
-          <InputWrapper> */}
+            <small>{errors.convertedAmount && <span>Please enter a valid number</span>}</small>
+
             <select {...register("convertedCurrency")}>
             {data && data.map(({code, name}) => (
                 <option key={name}>
